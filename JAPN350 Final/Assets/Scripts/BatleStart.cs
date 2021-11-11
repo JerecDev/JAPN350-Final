@@ -26,5 +26,10 @@ public class BatleStart : MonoBehaviour
             transform.Translate(.05f, 0, 0 * Time.deltaTime);
             m_distanceTraveled += Vector3.Distance(oldPosition, transform.position);
         }
+        else
+        {
+            groundImage.GetComponent<Renderer>().material.color = new Color(.176f, .765f, .373f);
+            ohnishiSprite.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+        }
     }
 }
