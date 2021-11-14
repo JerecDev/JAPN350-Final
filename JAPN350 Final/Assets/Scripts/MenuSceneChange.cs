@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MenuSceneChange : MonoBehaviour
 {
     public Button startButton;
+    public Button quitButton;
     int startFlash = 3;
     public Image flashImage;
     public int flashTimes;
@@ -15,17 +16,23 @@ public class MenuSceneChange : MonoBehaviour
 
     void Start()
     {
-        startButton.onClick.AddListener(TaskOnClickOne);
+        startButton.onClick.AddListener(StartGame);
+        quitButton.onClick.AddListener(QuitGame);
         menuMusic.gameObject.SetActive(true);
     }
 
-    void TaskOnClickOne()
+    void StartGame()
     {
         
         battleMusic.gameObject.SetActive(true);
         DontDestroyOnLoad(battleMusic.gameObject);
         StartCoroutine(waiter());
         menuMusic.gameObject.SetActive(false);
+    }
+
+    void QuitGame()
+    {
+        Application.Quit();
     }
 
     void Update()

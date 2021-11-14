@@ -3,7 +3,12 @@ guid: db234e04c71f66e4898c455265959a0b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - restartButton: {instanceID: 0}
+  - quitButton: {instanceID: 0}
+  - EffectPlayer: {instanceID: 0}
+  - lossSound: {instanceID: 0}
+  - winSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

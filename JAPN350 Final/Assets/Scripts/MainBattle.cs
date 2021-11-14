@@ -27,7 +27,9 @@ public class MainBattle : MonoBehaviour
     private int playerHealth = 5;
     private int profHealth = 5;
     public System.Random ran = new System.Random();
-    private AudioSource[] allAudioSources;
+    public AudioSource EffectPlayer;
+    public AudioClip ohnishiHits;
+    public AudioClip playerHits;
 
     private List<string> Questions = new List<string>()
     {
@@ -85,11 +87,13 @@ public class MainBattle : MonoBehaviour
         if(answerOne == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            EffectPlayer.PlayOneShot(playerHits, .5f);
             profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            EffectPlayer.PlayOneShot(ohnishiHits, .5f);
             playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
@@ -101,11 +105,13 @@ public class MainBattle : MonoBehaviour
         if (answerTwo == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            EffectPlayer.PlayOneShot(playerHits, .5f);
             profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            EffectPlayer.PlayOneShot(ohnishiHits, .5f);
             playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
@@ -117,11 +123,13 @@ public class MainBattle : MonoBehaviour
         if (answerThree == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            EffectPlayer.PlayOneShot(playerHits, .5f);
             profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            EffectPlayer.PlayOneShot(ohnishiHits, .5f);
             playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
@@ -133,11 +141,13 @@ public class MainBattle : MonoBehaviour
         if (answerFour == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            EffectPlayer.PlayOneShot(playerHits, .5f);
             profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            EffectPlayer.PlayOneShot(ohnishiHits, .5f);
             playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
@@ -211,14 +221,14 @@ public class MainBattle : MonoBehaviour
         IEnumerator FirstRound()
     {
         TextBox.GetComponent<TypedEffect>().TypeThis("Ohnishi-sensei would like to battle!");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3.5f);
         NewQuestion();
         yield break;
     }
 
     IEnumerator SecondRound()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3.5f);
         NewQuestion();
         yield break;
     }

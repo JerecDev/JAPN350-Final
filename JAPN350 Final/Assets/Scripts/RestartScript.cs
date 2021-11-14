@@ -7,21 +7,29 @@ using UnityEngine.UI;
 public class RestartScript : MonoBehaviour
 {
     public Button restartButton;
-    public GameObject lossMusic;
-    public GameObject winMusic;
+    public Button quitButton;
+    public AudioSource EffectPlayer;
+    public AudioClip lossSound;
+    public AudioClip winSound;
 
     void Start()
     {
         Scene currentScene = SceneManager.GetActiveScene();
         restartButton.onClick.AddListener(RestartGame);
+        quitButton.onClick.AddListener(QuitGame);
         if (currentScene.name == "LoseScreen")
         {
-            lossMusic.gameObject.SetActive(true);
+            EffectPlayer.PlayOneShot(lossSound, .5f);
         }
         if (currentScene.name == "WinScreen")
         {
-            winMusic.gameObject.SetActive(true);
+            EffectPlayer.PlayOneShot(winSound, .5f);
         }
+    }
+
+    void QuitGame()
+    {
+        Application.Quit();
     }
 
     void RestartGame()
