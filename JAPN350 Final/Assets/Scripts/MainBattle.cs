@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainBattle : MonoBehaviour
 {
@@ -9,18 +10,24 @@ public class MainBattle : MonoBehaviour
     public Text buttonTwoText;
     public Text buttonThreeText;
     public Text buttonFourText;
+    public Text playerHpText;
+    public Text ohnishiHpText;
     public Button buttonOne;
     public Button buttonTwo;
     public Button buttonThree;
     public Button buttonFour;
     public GameObject TextBox;
-    public string question = "";
-    public string answer = "";
-    public string answerOne = "";
-    public string answerTwo = "";
-    public string answerThree = "";
-    public string answerFour = "";
+    public GameObject audioPlayer;
+    private string question = "";
+    private string answer = "";
+    private string answerOne = "";
+    private string answerTwo = "";
+    private string answerThree = "";
+    private string answerFour = "";
+    private int playerHealth = 5;
+    private int profHealth = 5;
     public System.Random ran = new System.Random();
+    private AudioSource[] allAudioSources;
 
     private List<string> Questions = new List<string>()
     {
@@ -43,6 +50,8 @@ public class MainBattle : MonoBehaviour
     void Start()
     {
         DeactivateButtons();
+        playerHpText.GetComponent<Text>().text = "5/5";
+        ohnishiHpText.GetComponent<Text>().text = "5/5";
         buttonOneText.GetComponent<Text>().text = "";
         buttonTwoText.GetComponent<Text>().text = "";
         buttonThreeText.GetComponent<Text>().text = "";
@@ -51,6 +60,7 @@ public class MainBattle : MonoBehaviour
         buttonTwo.onClick.AddListener(AnswerTwo);
         buttonThree.onClick.AddListener(AnswerThree);
         buttonFour.onClick.AddListener(AnswerFour);
+        audioPlayer = GameObject.FindWithTag("BattleAudio");
         GameStart();
     }
 
@@ -75,13 +85,15 @@ public class MainBattle : MonoBehaviour
         if(answerOne == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
-        StartCoroutine(SecondRound());
+        CheckHealth();
     }
 
     void AnswerTwo()
@@ -89,13 +101,15 @@ public class MainBattle : MonoBehaviour
         if (answerTwo == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
-        StartCoroutine(SecondRound());
+        CheckHealth();
     }
 
     void AnswerThree()
@@ -103,13 +117,15 @@ public class MainBattle : MonoBehaviour
         if (answerThree == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
-        StartCoroutine(SecondRound());
+        CheckHealth();
     }
 
     void AnswerFour()
@@ -117,18 +133,38 @@ public class MainBattle : MonoBehaviour
         if (answerFour == answer)
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Correct Answer!");
+            profHealth = profHealth - 1;
         }
         else
         {
             TextBox.GetComponent<TypedEffect>().TypeThis("Wrong Answer!");
+            playerHealth = playerHealth - 1;
         }
         DeactivateButtons();
-        StartCoroutine(SecondRound());
+        CheckHealth();
     }
 
     void GameStart()
     {
         StartCoroutine(FirstRound());
+    }
+
+    void CheckHealth()
+    {
+        playerHpText.GetComponent<Text>().text = playerHealth + "/5";
+        ohnishiHpText.GetComponent<Text>().text = profHealth + "/5";
+        if (playerHealth <= 0)
+        {
+            StartCoroutine(CallOnLoss());
+        }
+        else if(profHealth <= 0)
+        {
+            StartCoroutine(CallOnWin());
+        }
+        else
+        {
+            StartCoroutine(SecondRound());
+        }
     }
 
     void NewQuestion()
@@ -172,7 +208,7 @@ public class MainBattle : MonoBehaviour
         AnswerList.RemoveAt(newAnswer);
     }
 
-    IEnumerator FirstRound()
+        IEnumerator FirstRound()
     {
         TextBox.GetComponent<TypedEffect>().TypeThis("Ohnishi-sensei would like to battle!");
         yield return new WaitForSeconds(5f);
@@ -184,5 +220,28 @@ public class MainBattle : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         NewQuestion();
+        yield break;
+    }
+
+    IEnumerator CallOnLoss()
+    {
+        TextBox.GetComponent<TypedEffect>().TypeThis("You have no more chances left!");
+        yield return new WaitForSeconds(5f);
+        TextBox.GetComponent<TypedEffect>().TypeThis("Player blacked out!");
+        yield return new WaitForSeconds(5f);
+        Destroy(audioPlayer);
+        SceneManager.LoadScene(sceneName: "LoseScreen");
+        yield break;
+    }
+
+    IEnumerator CallOnWin()
+    {
+        TextBox.GetComponent<TypedEffect>().TypeThis("Player defeated Ohnishi sensei!");
+        yield return new WaitForSeconds(5f);
+        TextBox.GetComponent<TypedEffect>().TypeThis("Player got an A+ for winning!");
+        yield return new WaitForSeconds(5f);
+        Destroy(audioPlayer);
+        SceneManager.LoadScene(sceneName: "WinScreen");
+        yield break;
     }
 }

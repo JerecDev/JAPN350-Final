@@ -10,18 +10,22 @@ public class MenuSceneChange : MonoBehaviour
     int startFlash = 3;
     public Image flashImage;
     public int flashTimes;
-    public GameObject audioSource;
+    public GameObject battleMusic;
+    public GameObject menuMusic;
 
     void Start()
     {
         startButton.onClick.AddListener(TaskOnClickOne);
+        menuMusic.gameObject.SetActive(true);
     }
 
     void TaskOnClickOne()
     {
-        audioSource.gameObject.SetActive(true);
-        DontDestroyOnLoad(audioSource.gameObject);
+        
+        battleMusic.gameObject.SetActive(true);
+        DontDestroyOnLoad(battleMusic.gameObject);
         StartCoroutine(waiter());
+        menuMusic.gameObject.SetActive(false);
     }
 
     void Update()

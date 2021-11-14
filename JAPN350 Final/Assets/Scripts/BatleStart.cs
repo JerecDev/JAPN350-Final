@@ -8,6 +8,7 @@ public class BatleStart : MonoBehaviour
     float m_distanceTraveled = 0f;
     public GameObject groundImage;
     public GameObject ohnishiSprite;
+    public GameObject healthBoxOhnishi;
     bool colorFlip;
 
     void Start()
@@ -30,6 +31,7 @@ public class BatleStart : MonoBehaviour
         {
             groundImage.GetComponent<Renderer>().material.color = new Color(.176f, .765f, .373f);
             ohnishiSprite.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+            healthBoxOhnishi.gameObject.SetActive(true);
         }
     }
 }
