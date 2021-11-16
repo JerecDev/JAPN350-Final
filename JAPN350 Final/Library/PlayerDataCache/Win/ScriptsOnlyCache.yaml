@@ -8,8 +8,6 @@ ScriptsOnlyBuild:
     - TypedEffect
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
@@ -43,6 +41,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
@@ -51,6 +53,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11320}
     - Class: 114
       Script: {instanceID: 11360}
+    - Class: 114
+      Script: {instanceID: 11542}
     - Class: 114
       Script: {instanceID: 11776}
     - Class: 114
@@ -401,7 +405,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 78ab43b3f41470f32bba17cef7635d9d
+      Hash: c1d00e06adfd7775d763d881343d1495
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RestartScript
@@ -509,7 +513,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: de773a18d81a105729b7b7da86c2dbfc
+      Hash: 7638dc4d76a9d558f75a627322e78f16
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainBattle
@@ -711,4 +715,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/BattleScene.unity
   - Assets/Scenes/WinScreen.unity
   - Assets/Scenes/LoseScreen.unity
-  playerPath: C:/Users/zacha/Desktop/JAPN 350 Final/JAPN350 Final.exe
+  playerPath: C:/Users/zacha/Desktop/JAPN350 Final.exe

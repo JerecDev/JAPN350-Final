@@ -10,14 +10,24 @@ public class MainBattle : MonoBehaviour
     public Text buttonTwoText;
     public Text buttonThreeText;
     public Text buttonFourText;
-    public Text playerHpText;
-    public Text ohnishiHpText;
     public Button buttonOne;
     public Button buttonTwo;
     public Button buttonThree;
     public Button buttonFour;
     public GameObject TextBox;
     public GameObject audioPlayer;
+    public Image ohnishiSpriteRenderer;
+    public Image playerSpriteRenderer;
+    public Sprite playerHealthFive;
+    public Sprite playerHealthFour;
+    public Sprite playerHealthThree;
+    public Sprite playerHealthTwo;
+    public Sprite playerHealthOne;
+    public Sprite ohnishiHealthFive;
+    public Sprite ohnishiHealthFour;
+    public Sprite ohnishiHealthThree;
+    public Sprite ohnishiHealthTwo;
+    public Sprite ohnishiHealthOne;
     private string question = "";
     private string answer = "";
     private string answerOne = "";
@@ -52,8 +62,8 @@ public class MainBattle : MonoBehaviour
     void Start()
     {
         DeactivateButtons();
-        playerHpText.GetComponent<Text>().text = "5/5";
-        ohnishiHpText.GetComponent<Text>().text = "5/5";
+        playerSpriteRenderer.sprite = playerHealthFive;
+        ohnishiSpriteRenderer.sprite = ohnishiHealthFive;
         buttonOneText.GetComponent<Text>().text = "";
         buttonTwoText.GetComponent<Text>().text = "";
         buttonThreeText.GetComponent<Text>().text = "";
@@ -161,8 +171,42 @@ public class MainBattle : MonoBehaviour
 
     void CheckHealth()
     {
-        playerHpText.GetComponent<Text>().text = playerHealth + "/5";
-        ohnishiHpText.GetComponent<Text>().text = profHealth + "/5";
+        //Player health checks, adjusting sprite
+        if(playerHealth == 4)
+        {
+            playerSpriteRenderer.sprite = playerHealthFour;
+        }
+        if (playerHealth == 3)
+        {
+            playerSpriteRenderer.sprite = playerHealthThree;
+        }
+        if (playerHealth == 2)
+        {
+            playerSpriteRenderer.sprite = playerHealthTwo;
+        }
+        if (playerHealth == 1)
+        {
+            playerSpriteRenderer.sprite = playerHealthOne;
+        }
+        //Professor health checks, adjusting sprite
+        if (profHealth == 4)
+        {
+            ohnishiSpriteRenderer.sprite = ohnishiHealthFour;
+        }
+        if (profHealth == 3)
+        {
+            ohnishiSpriteRenderer.sprite = ohnishiHealthThree;
+        }
+        if (profHealth == 2)
+        {
+            ohnishiSpriteRenderer.sprite = ohnishiHealthTwo;
+        }
+        if (profHealth == 1)
+        {
+            ohnishiSpriteRenderer.sprite = ohnishiHealthOne;
+        }
+
+
         if (playerHealth <= 0)
         {
             StartCoroutine(CallOnLoss());
@@ -218,10 +262,10 @@ public class MainBattle : MonoBehaviour
         AnswerList.RemoveAt(newAnswer);
     }
 
-        IEnumerator FirstRound()
+    IEnumerator FirstRound()
     {
         TextBox.GetComponent<TypedEffect>().TypeThis("Ohnishi-sensei would like to battle!");
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(5f);
         NewQuestion();
         yield break;
     }
