@@ -243,8 +243,6 @@ public class MainBattle : MonoBehaviour
             }
         }
 
-        ActivateButtons();
-
         newAnswer = ran.Next(0, AnswerList.Count);
         buttonOneText.GetComponent<Text>().text = AnswerList[newAnswer];
         answerOne = AnswerList[newAnswer];
@@ -274,6 +272,8 @@ public class MainBattle : MonoBehaviour
         yield return new WaitForSeconds(6f);
 
         NewQuestion();
+        yield return new WaitForSeconds(2f);
+        ActivateButtons();
         yield break;
     }
 
@@ -281,6 +281,8 @@ public class MainBattle : MonoBehaviour
     {
         yield return new WaitForSeconds(3.5f);
         NewQuestion();
+        yield return new WaitForSeconds(2f);
+        ActivateButtons();
         yield break;
     }
 
