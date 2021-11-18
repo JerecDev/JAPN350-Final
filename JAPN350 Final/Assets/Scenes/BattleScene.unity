@@ -881,11 +881,13 @@ MonoBehaviour:
   playerHealthThree: {fileID: 21300000, guid: a5bf558dc5b852543acbe5d4dc12f9cf, type: 3}
   playerHealthTwo: {fileID: 21300000, guid: 886f96c159c02664bb5225fa10180940, type: 3}
   playerHealthOne: {fileID: 21300000, guid: a6def8c9d093aaa4c86f6eb6f360c54b, type: 3}
+  playerHealthEmpty: {fileID: 21300000, guid: 804b0c645c4fcda46a413426ed15178f, type: 3}
   ohnishiHealthFive: {fileID: 21300000, guid: 42496dde987cc844ca74570d93b87c13, type: 3}
   ohnishiHealthFour: {fileID: 21300000, guid: 4e18922e1d591f345894853f3a35f55f, type: 3}
   ohnishiHealthThree: {fileID: 21300000, guid: 79c9b6a1396d5284e9e32b5a05291a49, type: 3}
   ohnishiHealthTwo: {fileID: 21300000, guid: 321fa474ca92bc74980a038ee08394d3, type: 3}
   ohnishiHealthOne: {fileID: 21300000, guid: 68ad593eceeb1604db588ba44d276f26, type: 3}
+  ohnishiHealthEmpty: {fileID: 21300000, guid: 68d9ea896f90e9b4cbbc79c14e90b4c5, type: 3}
   EffectPlayer: {fileID: 913310217}
   ohnishiHits: {fileID: 8300000, guid: a9928a888b7f66e4c811836d2c878d15, type: 3}
   playerHits: {fileID: 8300000, guid: 4bea96c7210997746bc83bbdbf1b04af, type: 3}

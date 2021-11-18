@@ -23,11 +23,13 @@ public class MainBattle : MonoBehaviour
     public Sprite playerHealthThree;
     public Sprite playerHealthTwo;
     public Sprite playerHealthOne;
+    public Sprite playerHealthEmpty;
     public Sprite ohnishiHealthFive;
     public Sprite ohnishiHealthFour;
     public Sprite ohnishiHealthThree;
     public Sprite ohnishiHealthTwo;
     public Sprite ohnishiHealthOne;
+    public Sprite ohnishiHealthEmpty;
     private string question = "";
     private string answer = "";
     private string answerOne = "";
@@ -49,6 +51,26 @@ public class MainBattle : MonoBehaviour
         "Kyoo  wa  nangatsu  nannichi  desuka?",
         "Kyoo  no  otenki  wa?",
         "Nangatsu  umare  desuka?",
+    };
+
+    private List<string> QuestionsTwo = new List<string>()
+    {
+        "Translate: きょう",
+        "Translate: おはよう",
+        "Translate: こんばんは",
+        "Translate: おやすみなさい",
+        "Translate: こんにちは",
+        "Translate: すみません"
+    };
+
+    private List<string> AnswersTwo = new List<string>()
+    {
+        "Kyoo",
+        "Ohayoo",
+        "Konbanwa",
+        "Oyasuminasai",
+        "Konnichiwa",
+        "Kyoo"
     };
 
     private List<string> Answers = new List<string>()
@@ -78,6 +100,14 @@ public class MainBattle : MonoBehaviour
         buttonFour.onClick.AddListener(AnswerFour);
         audioPlayer = GameObject.FindWithTag("BattleAudio");
         GameStart();
+    }
+
+    void Update()
+    {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
     }
 
     void ActivateButtons()
@@ -192,6 +222,11 @@ public class MainBattle : MonoBehaviour
         {
             playerSpriteRenderer.sprite = playerHealthOne;
         }
+        if (playerHealth == 0)
+        {
+            playerSpriteRenderer.sprite = playerHealthEmpty;
+        }
+
         //Professor health checks, adjusting sprite
         if (profHealth == 4)
         {
@@ -208,6 +243,10 @@ public class MainBattle : MonoBehaviour
         if (profHealth == 1)
         {
             ohnishiSpriteRenderer.sprite = ohnishiHealthOne;
+        }
+        if (profHealth == 0)
+        {
+            ohnishiSpriteRenderer.sprite = ohnishiHealthEmpty;
         }
 
 
@@ -264,14 +303,60 @@ public class MainBattle : MonoBehaviour
         AnswerList.RemoveAt(newAnswer);
     }
 
+    void NewQuestionTwo()
+    {
+        int answerIndex = ran.Next(0, AnswersTwo.Count);
+        int newAnswer = 0;
+        answer = AnswersTwo[answerIndex];
+        question = QuestionsTwo[answerIndex];
+        TextBox.GetComponent<TypedEffect>().TypeThis(question);
+        AnswerList.Add(AnswersTwo[answerIndex]);
+
+        while (AnswerList.Count < 4)
+        {
+            newAnswer = ran.Next(0, 4);
+            if (!AnswerList.Contains(AnswersTwo[newAnswer]))
+            {
+                AnswerList.Add(AnswersTwo[newAnswer]);
+            }
+        }
+
+        newAnswer = ran.Next(0, AnswerList.Count);
+        buttonOneText.GetComponent<Text>().text = AnswerList[newAnswer];
+        answerOne = AnswerList[newAnswer];
+        AnswerList.RemoveAt(newAnswer);
+
+        newAnswer = ran.Next(0, AnswerList.Count);
+        buttonTwoText.GetComponent<Text>().text = AnswerList[newAnswer];
+        answerTwo = AnswerList[newAnswer];
+        AnswerList.RemoveAt(newAnswer);
+
+        newAnswer = ran.Next(0, AnswerList.Count);
+        buttonThreeText.GetComponent<Text>().text = AnswerList[newAnswer];
+        answerThree = AnswerList[newAnswer];
+        AnswerList.RemoveAt(newAnswer);
+
+        newAnswer = ran.Next(0, AnswerList.Count);
+        buttonFourText.GetComponent<Text>().text = AnswerList[newAnswer];
+        answerFour = AnswerList[newAnswer];
+        AnswerList.RemoveAt(newAnswer);
+    }
+
     IEnumerator FirstRound()
     {
         TextBox.GetComponent<TypedEffect>().TypeThis("Ohnishi-sensei  would  like  to  battle!");
         yield return new WaitForSeconds(5f);
         TextBox.GetComponent<TypedEffect>().TypeThis("Defeat  her by  selecting  the  most  relevant  answers!");
         yield return new WaitForSeconds(6f);
-
-        NewQuestion();
+        int choice = ran.Next(0, 2);
+        if (choice == 0 && Questions.Count != 0)
+        {
+            NewQuestion();
+        }
+        else if (QuestionsTwo.Count != 0)
+        {
+            NewQuestionTwo();
+        }
         yield return new WaitForSeconds(2f);
         ActivateButtons();
         yield break;
@@ -280,7 +365,15 @@ public class MainBattle : MonoBehaviour
     IEnumerator SecondRound()
     {
         yield return new WaitForSeconds(3.5f);
-        NewQuestion();
+        int choice = ran.Next(0, 2);
+        if (choice == 0)
+        {
+            NewQuestion();
+        }
+        else
+        {
+            NewQuestionTwo();
+        }
         yield return new WaitForSeconds(2f);
         ActivateButtons();
         yield break;

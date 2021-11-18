@@ -515,7 +515,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: f61d157178510dbc85891d91e462f8c6
+      Hash: 3f52dcdb9a8f391ba4d46071bcf6970e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainBattle
